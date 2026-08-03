@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Sync this repository's skills into Codex and Claude discovery directories.
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
+SOURCE_SKILLS=${SOURCE_SKILLS:-"$REPO_ROOT/skills"}
+CODEX_SKILLS_ROOT=${CODEX_SKILLS_ROOT:-"${CODEX_HOME:-$HOME/.codex}/skills"}
+CLAUDE_SKILLS_ROOT=${CLAUDE_SKILLS_ROOT:-"$HOME/.claude/skills"}
+CODEX_BUNDLE_NAME=${CODEX_BUNDLE_NAME:-"$(basename "$REPO_ROOT")"}
+
+if [[ ! -d "$SOURCE_SKILLS" ]]; then
+  printf 'error: skills directory not found: %s\n' "$SOURCE_SKILLS" >&2
+  exit 1
+fi
+
+for root in "$CODEX_SKILLS_ROOT" "$CLAUDE_SKILLS_ROOT"; do
+  if [[ -L "$root" ]]; then
+    printf 'error: refusing to replace symlinked skills root: %s\n' "$root" >&2
+    exit 1
+  fi
+  mkdir -p "$root"
+done
+
+link_to() {
+  local target=$1
+  local destination=$2
+  if [[ -e "$destination" && ! -L "$destination" ]]; then
+    printf 'skip real path: %s\n' "$destination"
+    return
+  fi
+  if [[ "$(readlink "$destination" 2>/dev/null || true)" == "$target" ]]; then
+    return
+  fi
+  ln -sfn "$target" "$destination"
+  printf 'link %s -> %s\n' "$destination" "$target"
+}
+
+# Codex discovers nested skills, so one repository-level link is sufficient.
+link_to "$SOURCE_SKILLS" "$CODEX_SKILLS_ROOT/$CODEX_BUNDLE_NAME"
+
+# Claude discovers one skill per direct child, so create a flat mirror.
+for skill_dir in "$SOURCE_SKILLS"/*/; do
+  [[ -f "$skill_dir/SKILL.md" ]] || continue
+  skill_dir=${skill_dir%/}
+  link_to "$skill_dir" "$CLAUDE_SKILLS_ROOT/$(basename "$skill_dir")"
+done
+
+printf 'Skills synchronized from %s\n' "$SOURCE_SKILLS"

@@ -1,0 +1,17 @@
+{
+  "name": "loop-engineering-agent-toolkit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:list": "node --experimental-strip-types scripts/docs-list.ts",
+    "skills:sync": "scripts/sync-skills",
+    "skills:validate": "scripts/validate-skills",
+    "skills:clean": "node --experimental-strip-types skills/skill-cleaner/scripts/skill-cleaner.ts --root skills --root-only --no-logs",
+    "test:skill-cleaner": "node --experimental-strip-types --test skills/skill-cleaner/scripts/skill-cleaner.test.ts",
+    "test:orchestrator-policy": "scripts/test-maintainer-orchestrator-policy",
+    "test": "npm run skills:validate && npm run test:skill-cleaner && npm run test:orchestrator-policy"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

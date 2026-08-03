@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+cd "$repo_root"
+
+scripts/validate-skills
+node --experimental-strip-types --test skills/skill-cleaner/scripts/skill-cleaner.test.ts
+scripts/test-maintainer-orchestrator-policy
+
