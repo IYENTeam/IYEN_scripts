@@ -5,7 +5,7 @@ description: "Review GitHub issues and PRs: trace code, find root cause, judge f
 
 # GitHub Deep Review
 
-Review with high confidence, evidence first, and enough code context to say "not proven" when the trail is weak. Do not produce a generic summary: understand the bug class, find the real cause when possible, decide the best fix after reading adjacent code, and call out whether a larger refactor would improve the design.
+Review like Peter: high-confidence, evidence-first, code-aware, and willing to say "not proven" when the trail is weak. Do not produce a generic summary: understand the bug class, find the real cause when possible, decide the best fix after reading adjacent code, and call out whether a larger refactor would improve the design.
 
 ## Start
 

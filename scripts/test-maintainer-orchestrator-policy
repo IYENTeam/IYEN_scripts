@@ -5,27 +5,30 @@ skill = File.read(File.expand_path("../skills/maintainer-orchestrator/SKILL.md",
 metadata = File.read(File.expand_path("../skills/maintainer-orchestrator/agents/openai.yaml", __dir__))
 
 requirements = {
-  "IYENTeam default scope" => "Treat `IYENTeam` as the default GitHub organization",
-  "one repository lane" => "Use exactly one execution lane per repository",
-  "root control plane" => "Keep root coordination, policy changes, and cross-repository decisions in the root session",
-  "URL is read-only" => "A URL authorizes inspection, not mutation",
-  "preserve unknown work" => "Never discard, overwrite, stash, reset, clean, or force-push unknown work",
-  "triage is read-only" => "Triage is read-only unless the user also asks to act",
-  "root cause before patch" => "Reproduce the behavior or establish the root cause",
-  "exact-head CI" => "exact-head CI",
-  "secret protection" => "Never print secrets or broadly dump environment variables",
-  "explicit release authority" => "A release requires explicit user authorization",
-  "Korean closeout" => "End with a concise Korean report",
-  "remote verification" => "Never report success from a local patch alone when the requested outcome was remote",
+  "owned project lane" => "Use exactly one owned Codex app project thread per repository",
+  "support-only subagents" => "Use collaboration subagents only for orchestration support",
+  "subagent mutation ban" => "Collaboration subagents must never edit repository files",
+  "preservation-first recovery" => "Snapshot and preserve its state, patches, refs, logs, and evidence",
+  "capability verification" => "Thread prompts do not grant capabilities",
+  "serialized public gate" => "admit no additional public action until the overlap clears",
+  "private work continues" => "Private investigation, implementation, testing, proof, and review continue independently",
+  "decision-ready queue" => "Do not ask the owner to decide from an unprepared issue or rough contributor branch",
+  "product policy capture" => "Product Policy Capture",
+  "dependency autonomy" => "Dependency Autonomy",
+  "live proof gate" => "Live Proof Gate",
+  "public identifier gate" => "Public Model Identifier Gate",
+  "explicit release authority" => "the owner has explicitly requested this release",
+  "release verification" => "verify the actual release",
+  "full issue URLs" => "full canonical clickable URL",
 }
 
 missing = requirements.reject { |_label, text| skill.include?(text) }
 abort "Missing maintainer-orchestrator policy: #{missing.keys.join(', ')}" unless missing.empty?
 
-forbidden = ["steipete", "Peter", "OpenClaw", "ClawSweeper", "RepoBar"]
+forbidden = ["steipete", "Peter", "OpenClaw", "ClawSweeper", "RepoBar", "30 concurrent"]
 found = forbidden.select { |text| skill.match?(/#{Regexp.escape(text)}/i) }
-abort "Personal upstream policy remains: #{found.join(', ')}" unless found.empty?
+abort "Upstream machine/account detail remains: #{found.join(', ')}" unless found.empty?
 
-abort "Stale maintainer-orchestrator metadata" unless metadata.include?("IYENTeam") && metadata.include?("one execution lane per repository")
+abort "Stale maintainer-orchestrator metadata" unless metadata.include?("one project lane per repository") && metadata.include?("proof gates")
 
-puts "Validated IYEN maintainer-orchestrator policy."
+puts "Validated retained maintainer-orchestrator principles."

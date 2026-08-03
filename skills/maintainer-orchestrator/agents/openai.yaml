@@ -1,4 +1,4 @@
 interface:
-  display_name: "IYEN Maintainer Orchestrator"
-  short_description: "Coordinate verified IYENTeam repository maintenance"
-  default_prompt: "Use $maintainer-orchestrator to coordinate IYENTeam repository maintenance with one execution lane per repository, evidence-first fixes, explicit GitHub mutation authority, exact-head CI, and clear Korean closeout reports."
+  display_name: "Maintainer Orchestrator"
+  short_description: "Coordinate one verified project lane per repository"
+  default_prompt: "Use $maintainer-orchestrator to coordinate one project lane per repository, preserve work, keep support subagents read-only, enforce proof gates and exact-head CI, capture decisions, maintain dependencies, and prepare authorized releases."
