@@ -4,7 +4,7 @@ read_when:
   - 문서 또는 스킬을 추가하거나 정리할 때.
   - GitHub 이슈나 PR을 근거 중심으로 깊게 리뷰할 때.
 ---
-# Agent tooling
+# IYEN agent tooling
 
 ## 문서 목록
 
@@ -67,4 +67,3 @@ $github-deep-review https://github.com/OWNER/REPO/pull/123
 ```
 
 이 스킬은 요청받지 않는 한 comment, approve, close, merge 또는 push하지 않습니다.
-

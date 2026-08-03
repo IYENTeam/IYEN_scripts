@@ -406,20 +406,17 @@ function skillRootScope(root: string): string {
   const normalized = root.split(path.sep).join("/");
   if (normalized.includes("/.codex/plugins/cache")) return "codex-plugin";
   if (normalized.includes("/.codex/skills")) return "codex";
-  if (normalized.includes("/Projects/agent-scripts/skills")) return "agent-scripts";
   if (normalized.includes("/.agents/skills")) return "repo";
-  if (normalized.includes("/Dropbox/")) return "dropbox";
   return "extra";
 }
 
 function deletePriority(skill: Skill): number {
   if (skill.path.includes("/.codex/skills/.system/")) return 0;
-  if (skill.path.includes("/.codex/skills/") && !skill.realPath.includes("/Projects/agent-scripts/")) return 1;
+  if (skill.path.includes("/.codex/skills/")) return 1;
   if (skill.path.includes("/.codex/plugins/cache/") && !skill.path.includes("/plugin-install-")) return 2;
   if (skill.path.includes("/.codex/plugins/cache/")) return 3;
-  if (skill.realPath.includes("/Projects/agent-scripts/skills/")) return 4;
-  if (skill.realPath.includes("/.agents/skills/")) return 5;
-  return 6;
+  if (skill.realPath.includes("/.agents/skills/")) return 4;
+  return 5;
 }
 
 function preferredKeepSkill(list: Skill[]): Skill {
@@ -431,9 +428,7 @@ function preferredKeepSkill(list: Skill[]): Skill {
 }
 
 function displayPathPriority(skill: Skill): number {
-  if (skill.path.includes("/.codex/skills/agent-scripts/")) return 10;
-  if (skill.path === skill.realPath) return 0;
-  return 1;
+  return skill.path === skill.realPath ? 0 : 1;
 }
 
 function preferredDisplaySkill(a: Skill, b: Skill): Skill {
@@ -520,7 +515,6 @@ export function discoverRoots(
     : [
         path.join(baseHome, ".codex/skills"),
         path.join(baseHome, ".codex/plugins/cache"),
-        path.join(baseHome, "Projects/agent-scripts/skills"),
         ...roots,
       ];
   candidates.forEach((root) => {
@@ -596,11 +590,7 @@ function recentLogFiles(): string[] {
   const files = new Set<string>();
   const roots = [path.join(home, ".codex/sessions")];
   if (deepLogs) {
-    roots.push(
-      path.join(home, ".codex/archived_sessions"),
-      path.join(home, ".openclaw"),
-      path.join(home, ".clawd"),
-    );
+    roots.push(path.join(home, ".codex/archived_sessions"));
   }
   const history = path.join(home, ".codex/history.jsonl");
   if (exists(history)) files.add(history);

@@ -19,7 +19,6 @@ test("limits root discovery to explicitly supplied roots", (context) => {
   const defaultRoots = [
     path.join(temp, ".codex/skills"),
     path.join(temp, ".codex/plugins/cache"),
-    path.join(temp, "Projects/agent-scripts/skills"),
     path.join(temp, "Projects/demo/.agents/skills"),
   ];
   const isolatedRoot = path.join(temp, "isolated/skills");

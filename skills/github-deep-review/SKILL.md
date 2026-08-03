@@ -1,6 +1,6 @@
 ---
 name: github-deep-review
-description: "GitHub deep review: bugs, PRs, best fix, stale-or-real, read code first."
+description: "Review GitHub issues and PRs: trace code, find root cause, judge fixes, verify proof, and state risk."
 ---
 
 # GitHub Deep Review
@@ -123,3 +123,5 @@ Risk: <remaining uncertainty>
 ```
 
 Keep it concise, but do not skip the cause/fix/refactor/proof decision.
+
+Answer in Korean by default. Preserve code symbols, commands, URLs, and established technical terms when translating them improves neither clarity nor accuracy.

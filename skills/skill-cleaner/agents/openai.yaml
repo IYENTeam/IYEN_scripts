@@ -1,4 +1,4 @@
 interface:
   display_name: "Skill Cleaner"
   short_description: "Audit skill budget, usage, and duplicates"
-  default_prompt: "Use $skill-cleaner to audit loaded Codex/OpenClaw skills, duplicate skill copies, unused skills from recent logs, and compact description candidates."
+  default_prompt: "Use $skill-cleaner to audit loaded Codex and repository skills, duplicate copies, recent usage, prompt-budget pressure, and compact description candidates without deleting anything."
