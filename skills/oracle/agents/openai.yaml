@@ -1,0 +1,4 @@
+interface:
+  display_name: "Oracle"
+  short_description: "Request an independent model review with selected files"
+  default_prompt: "Use $oracle to prepare a focused second-model review: preview the file bundle and token cost, exclude secrets, run only with the required consent, and verify the advisory result against source and tests."

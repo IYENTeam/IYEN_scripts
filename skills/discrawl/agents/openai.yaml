@@ -1,0 +1,4 @@
+interface:
+  display_name: "DisCrawl"
+  short_description: "Search and inspect a local Discord archive"
+  default_prompt: "Use $discrawl to check archive freshness, search Discord channels or DMs, run read-only counts when needed, and report date ranges and known gaps without exposing credentials."

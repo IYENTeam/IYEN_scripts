@@ -19,6 +19,9 @@ For example:
 <CODEX_SKILLS_PATH> = /path/to/your/.codex/skills
 <CLAUDE_SKILLS_PATH> = /path/to/your/.claude/skills
 <SECONDARY_SKILLS_PATH> = /path/to/your/secondary/skills
+<DISCRAWL_REPO_PATH> = /path/to/your/discrawl
+<SLACRAWL_REPO_PATH> = /path/to/your/slacrawl
+<ORACLE_REPO_PATH> = /path/to/your/oracle
 ```
 
 The actual locations are up to you. Absolute paths are the clearest choice; home-relative paths such as `~/your/path` also work when the command or tool expands `~`.
@@ -60,6 +63,12 @@ Add current symlinked repo-owned skills here:
 ```text
 <REPO_OWNED_SKILLS>
 ```
+
+The bundled external-tool skills currently include:
+
+- `discrawl`: local Discord archive search and freshness checks; requires the `discrawl` CLI.
+- `slacrawl`: local Slack archive search and freshness checks; requires the `slacrawl` CLI.
+- `oracle`: selected-file second-model review; invokes the public `@steipete/oracle` CLI package.
 
 ## Agent Instructions
 
