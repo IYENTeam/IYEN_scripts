@@ -8,6 +8,23 @@ This repo is the canonical place for:
 - `scripts/`: dependency-light helpers used across projects
 - `hooks/`: local guardrails such as skill validation
 
+## Path Placeholders
+
+Values written as `<...>` are placeholders, not literal commands or directory names. Replace each one with the matching path or name for your own machine before using the examples.
+
+For example:
+
+```text
+<AGENT_SCRIPTS_PATH> = /path/to/your/agent-scripts
+<CODEX_SKILLS_PATH> = /path/to/your/.codex/skills
+<CLAUDE_SKILLS_PATH> = /path/to/your/.claude/skills
+<SECONDARY_SKILLS_PATH> = /path/to/your/secondary/skills
+```
+
+The actual locations are up to you. Absolute paths are the clearest choice; home-relative paths such as `~/your/path` also work when the command or tool expands `~`.
+
+Other placeholders such as `<BUNDLE_NAME>`, `<SKILL_NAME>`, and `<REPO_OWNED_SKILLS>` should likewise be replaced with names or values from your own setup. Do not include the angle brackets after replacing a value.
+
 ## Skills
 
 Skills are the main routing layer. Each `skills/<name>/SKILL.md` has YAML front matter:
